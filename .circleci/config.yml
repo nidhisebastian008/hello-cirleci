@@ -31,6 +31,14 @@ jobs:
       - run:
           name: "print sec"
           command: "echo sec printed!"
+  print-name:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "print env var"
+          command: echo $NAME_VAR
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -40,3 +48,4 @@ workflows:
       - say-hello
       - print-first
       - print-sec
+      - print-name
