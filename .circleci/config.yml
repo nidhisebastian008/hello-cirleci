@@ -37,7 +37,8 @@ jobs:
     steps:
       - run:
           name: "print env var"
-          command: echo ${NAME_VAR}
+          command: |
+            echo $NAME_VAR
 
 
 # Invoke jobs via workflows
