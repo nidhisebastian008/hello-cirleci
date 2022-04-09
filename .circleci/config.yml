@@ -45,7 +45,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run:
-          name: "print sec"
+          name: "print to a file"
           command: echo "text to output here" > output.txt
       - persist_to_workspace:
           root: ~/
