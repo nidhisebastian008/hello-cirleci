@@ -30,7 +30,7 @@ jobs:
     steps:
       - run:
           name: "print sec"
-          command: "echo sec printed!"
+          command: "echo "text to output here" > output.txt"
   print-name:
     docker:
       - image: circleci/node:13.8.0
@@ -39,6 +39,25 @@ jobs:
           name: "print env var"
           command: |
             echo $NAME_VAR
+  save_hello_world_output:
+  
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "print sec"
+          command: "echo "text to output here" > output.txt"
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - output.txt
+   print_output_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: cat ~/output.txt
 
 
 # Invoke jobs via workflows
@@ -46,7 +65,7 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
-      - print-first
-      - print-sec
-      - print-name
+      - save_hello_world_output
+      - print_output_file:
+          requires:
+            - save_hello_world_output
