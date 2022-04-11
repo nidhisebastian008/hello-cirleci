@@ -26,11 +26,11 @@ jobs:
 
   print_pl_id_job:
     docker:
-        - image: circleci/node:13.8.0
-      steps:
-        print_pipeline_id
+      - image: circleci/node:13.8.0
+    steps:
+      - print_pipeline_id
 
 workflows:
   my_workflow:
     jobs:
-      - print_pipeline_id
+      - print_pl_id_job
